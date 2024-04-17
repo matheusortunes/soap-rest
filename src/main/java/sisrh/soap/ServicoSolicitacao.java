@@ -29,11 +29,11 @@ public class ServicoSolicitacao {
 
         Solicitacoes solicitacoes = new Solicitacoes();
 
-        List<Empregado> lista = Banco.listarEmpregados();
-        for(Empregado emp: lista) {
-            empregados.getEmpregados().add(emp);
+        List<Solicitacao> lista = Banco.listarSolicitacoes(Autenticador.getUsuario());
+        for(Solicitacao sol: lista) {
+            solicitacoes.getSolicitacoes().add(sol);
         }
-        return empregados;
+        return solicitacoes;
     }
 
 }
