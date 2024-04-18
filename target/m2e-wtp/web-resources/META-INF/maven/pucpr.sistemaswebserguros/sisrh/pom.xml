@@ -7,14 +7,15 @@
 	<version>1.0.0-Final</version>
 	<packaging>war</packaging>
 	<dependencies>
-		
+
 		<!-- JaxWS -->
 		<dependency>
 			<groupId>com.sun.xml.ws</groupId>
 			<artifactId>jaxws-rt</artifactId>
 			<version>2.3.5</version>
 		</dependency>
-		
+
+
 		<!-- Servlet Api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -29,6 +30,53 @@
 			<artifactId>hsqldb</artifactId>
 			<version>2.6.0</version>
 		</dependency>
+		<!-- JAX-RS -->
+		<dependency>
+			<groupId>com.sun.xml.ws</groupId>
+			<artifactId>jaxws-rt</artifactId>
+			<version>2.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<version>2.4.1</version>
+		</dependency>
+
+		<!-- SWAGGER -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jaxrs</artifactId>
+			<version>1.5.7</version>
+		</dependency>
+		
+		<!-- JWT -->
+	<dependency>
+		<groupId>io.jsonwebtoken</groupId>
+		<artifactId>jjwt-api</artifactId>
+		<version>0.11.1</version>
+	</dependency>
+	<dependency>
+		<groupId>io.jsonwebtoken</groupId>
+		<artifactId>jjwt-impl</artifactId>
+		<version>0.11.1</version>
+		<scope>runtime</scope>
+	</dependency>
+	<dependency>
+		<groupId>io.jsonwebtoken</groupId>
+		<artifactId>jjwt-jackson</artifactId>
+		<version>0.11.1</version>
+		<scope>runtime</scope>
+	</dependency>
 
 	</dependencies>
 	<build>
@@ -57,3 +105,4 @@
 		</pluginManagement>
 	</build>
 </project>
+

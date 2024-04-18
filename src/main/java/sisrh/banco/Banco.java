@@ -36,12 +36,12 @@ public class Banco {
 	static private void criarConexaoBanco() {
 		try {
 			conn = DriverManager.getConnection("jdbc:hsqldb:file:C:\\workspace\\sisrh_db\\rh_db", "SA", "");
-			System.out.println("Conex�o ao banco BANCO_SISRH.........[OK]");
+			System.out.println("Conexão ao banco BANCO_SISRH.........[OK]");
 		} catch (SQLException e) {
-			System.out.println("Conex�o ao banco BANCO_SISRH.........[NOK]");
+			System.out.println("Conexão ao banco BANCO_SISRH.........[NOK]");
 			if (e.getMessage().contains("lockFile")) {
 				JOptionPane.showMessageDialog(null,
-						"O banco est� bloqueado \n porque o Tomcat n�o liberou a conex�o. REINICIE O TOMCAT");
+						"O banco está bloqueado \n porque o Tomcat não liberou a conexão. REINICIE O TOMCAT");
 
 			} else {
 				e.printStackTrace();
@@ -101,33 +101,10 @@ public class Banco {
 		return lista;
 	}
 
-	// public static List<Solicitacao> listarSolicitacoes() throws Exception {
-	// 	List<Solicitacao> lista = new ArrayList<Solicitacao>();
-	// 	Connection conn = Banco.getConexao();
-	// 	String sql = "SELECT * FROM Solicitacao";
-	// 	PreparedStatement prepStmt = conn.prepareStatement(sql);
-	// 	ResultSet rs = prepStmt.executeQuery();
-	// 	while (rs.next()) {
-	// 		Integer id = rs.getInt("id");
-	// 		Date data = rs.getDate("data");
-	// 		String descricao = rs.getString("descricao");
-	// 		Integer situacao = rs.getInt("situacao");
-	// 		String matricula = rs.getString("matricula");
-	// 		Solicitacao solicitacao = new Solicitacao(id, data, descricao, situacao, matricula);
-	// 		lista.add(solicitacao);
-	// 	}
-	// 	rs.close();
-	// 	prepStmt.close();
-	// 	return lista;
-	// }
-
-	public static List<Solicitacao> listarSolicitacoes(String usuario) throws SQLException {
+	public static List<Solicitacao> listarSolicitacoes() throws Exception {
 		List<Solicitacao> lista = new ArrayList<Solicitacao>();
 		Connection conn = Banco.getConexao();
-		String sql = "SELECT * FROM Solicitacao as s\n" +
-				"INNER JOIN Empregado as e ON s.matricula = e.matricula\n" +
-				"INNER JOIN Usuario as u ON e.matricula = u.matricula\n" +
-				"WHERE u.nome = ?";
+		String sql = "SELECT * FROM Solicitacao";
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		ResultSet rs = prepStmt.executeQuery();
 		while (rs.next()) {
