@@ -10,8 +10,8 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.WebServiceContext;
 
 import sisrh.banco.Banco;
-import sisrh.dto.Empregado;
-import sisrh.dto.Empregados;
+import sisrh.dto.Solicitacao;
+import sisrh.dto.Solicitacoes;
 import sisrh.seguranca.Autenticador;
 
 @WebService
@@ -20,20 +20,26 @@ public class ServicoSolicitacao {
 
     @Resource
     WebServiceContext context;
-    private Empregado emp;
 
     @WebMethod(action = "solicitar")
-    public Empregados solicitar() throws Exception {
-
-        Autenticador.autenticarUsuarioSenha(context);
+    public Solicitacoes solicitar() throws Exception {
+        // Obter o nome do usuário autenticado
+        String usuario = Autenticador.getUsuario(context);
 
         Solicitacoes solicitacoes = new Solicitacoes();
 
-        List<Solicitacao> lista = Banco.listarSolicitacoes(Autenticador.getUsuario());
-        for(Solicitacao sol: lista) {
-            solicitacoes.getSolicitacoes().add(sol);
+        // Verificar se o usuário está autenticado
+        if (usuario != null && !usuario.isEmpty()) {
+            // Obter solicitações associadas ao usuário autenticado
+            List<Solicitacao> lista = Banco.listarSolicitacoes(usuario);
+            for (Solicitacao sol : lista) {
+                solicitacoes.getSolicitacoes().add(sol);
+            }
+        } else {
+            // Se o usuário não estiver autenticado, retornar uma lista vazia de solicitações
+            System.out.println("Usuário não autenticado.");
         }
+
         return solicitacoes;
     }
-
 }
